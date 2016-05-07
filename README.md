@@ -84,7 +84,7 @@ terrine
 eggs
 muffins
 muffins
-$ ./decloakify.py cloaked.txt ciphers/desserts.ciph<br>
+$ ./decloakify.py cloaked.txt ciphers/desserts.ciph
 The FBI just filed a motion to delay Tuesday's hearing in the San
 Bernardino iPhone case, claiming that an "outside party" may be able to
 help it break into the phone without Apple's help. The motion comes
@@ -94,6 +94,5 @@ It's not clear who is helping the FBI or what the new method entails,
 but it may not be coming from the NSA, despite speculation that the
 intelligence agency has the ability up its sleeve; today's filing
 suggests that the help is coming from "outside the US government."
-
 $
 </pre>
