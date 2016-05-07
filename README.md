@@ -36,7 +36,7 @@ Prepackaged ciphers include lists of:
 - Desserts in English, Arabic, Thai, Russian, Hindi, Chinese, Persian,
 and Muppet (Swedish Chef)
 - IPv4 Addresses of Popular Websites
-- GeoCoords World Capitols (Lat/Lon)
+- GeoCoords World Capitals (Lat/Lon)
 - MD5 Password Hashes
 - Emoji
 - Amphibians (scientific names)
