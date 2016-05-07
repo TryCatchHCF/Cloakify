@@ -1,8 +1,15 @@
 # Cloakify
-Cloakify Toolset - Data Exfiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Evade AV Detection. Text-based steganography usings lists. Very simple tools, powerful concept.
+Cloakify Toolset - Data Exfiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Evade AV Detection. Text-based steganography usings lists. Very simple tools, powerful concept, limited only by your imagination.
 
 # Author
 Joe Gervais (TryCatchHCF)
+
+# Why
+
+DLP systems, MLS devices, and SecOps analysts know what data to look for: 
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/payloadExample.png></img>
+So transform that data into something they're <b>not</b> looking for: 
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloakedExample.png></img>
 
 # Description
 Python scripts to cloak / uncloak payloads using list-based ciphers
@@ -96,3 +103,8 @@ intelligence agency has the ability up its sleeve; today's filing
 suggests that the help is coming from "outside the US government."
 $
 </pre>
+
+# Cipher Gallery
+
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples1.png></img>
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples2.png></img>
