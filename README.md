@@ -74,7 +74,7 @@ buttermilk
 terrine
 eggs
 muffins
-muffins
+snickerdoodles
 $
 </pre>
 
@@ -90,7 +90,7 @@ buttermilk
 terrine
 eggs
 muffins
-muffins
+snickerdoodles
 $ ./decloakify.py cloaked.txt ciphers/desserts.ciph
 The FBI just filed a motion to delay Tuesday's hearing in the San
 Bernardino iPhone case, claiming that an "outside party" may be able to
