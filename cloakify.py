@@ -39,27 +39,29 @@
 #	  but does not do "secure delete" (potential digital forensics trail)
 
 from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
-import os, sys, getopt, base64
+import os
+import sys
+import base64
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
-payloadB64 = "payloadB64.txt";
+payloadB64 = "payloadB64.txt"
 
-if ( len(sys.argv) != 3 ):
+if len(sys.argv) != 3:
 	print("usage: cloakify.py <payloadFilename> <cipherFilename>")
 	exit()
 
 else:
-	base64.encode( open( sys.argv[1], 'rb' ), open( payloadB64, "wb" ))
+	base64.encode(open(sys.argv[1], 'rb'), open(payloadB64, "wb"))
 
-	with open( payloadB64 ) as file:
+	with open(payloadB64) as file:
 		payloadCloaked = file.read()
 
-	with open( sys.argv[2]) as file:
+	with open(sys.argv[2]) as file:
 		arrayCipher = file.readlines()
 
 	for char in payloadCloaked:
 		if char != '\n':
-			print(arrayCipher[ array64.index(char) ], end='')
+			print(arrayCipher[array64.index(char)], end='')
 
-	if os.path.exists( payloadB64 ):
-		os.remove( payloadB64 )
+	if os.path.exists(payloadB64):
+		os.remove(payloadB64)
