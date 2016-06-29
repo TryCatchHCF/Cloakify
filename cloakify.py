@@ -51,14 +51,14 @@ else:
 	base64.encode( open( sys.argv[1] ), open( payloadB64, "w" ))
 
 	with open( payloadB64 ) as file:
-    		payloadCloaked = file.read()
+		payloadCloaked = file.read()
 
 	with open( sys.argv[2]) as file:
-    		arrayCipher = file.readlines()
+		arrayCipher = file.readlines()
 
 	for char in payloadCloaked:
 		if char != '\n':
 			print arrayCipher[ array64.index(char) ],
 
 	if os.path.exists( payloadB64 ):
-    		os.remove( payloadB64 )
+		os.remove( payloadB64 )

@@ -35,10 +35,10 @@ if ( len(sys.argv) != 3 ):
 
 else:
 	with open( sys.argv[1]) as file:
-    		listExfiltrated = file.readlines()
+		listExfiltrated = file.readlines()
 
 	with open( sys.argv[2]) as file:
-    		arrayCipher = file.readlines()
+		arrayCipher = file.readlines()
 
 	clear64 = ""
 
