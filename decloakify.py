@@ -24,14 +24,14 @@
 #
 #   $ ./decloakify.py cloakedPayload.txt ciphers/desserts.ciph 
 
-
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
 import sys, getopt, base64
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
 
 if ( len(sys.argv) != 3 ):
-	print "usage: decloakify.py <cloakedFilename> <cipherFilename>"
-	exit
+	print("usage: decloakify.py <cloakedFilename> <cipherFilename>")
+	exit()
 
 else:
 	with open( sys.argv[1]) as file:
@@ -45,4 +45,4 @@ else:
 	for word in listExfiltrated:
 		clear64 +=  array64[ arrayCipher.index(word) ]
 
-	print base64.b64decode( clear64 )
+	print(base64.b64decode( clear64 ).decode('utf8'))

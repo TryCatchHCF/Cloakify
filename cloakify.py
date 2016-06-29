@@ -38,17 +38,18 @@
 #	- Creates temporary Base64 file in local directory and deletes when finished,
 #	  but does not do "secure delete" (potential digital forensics trail)
 
+from __future__ import division, absolute_import, with_statement, print_function, unicode_literals
 import os, sys, getopt, base64
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
 payloadB64 = "payloadB64.txt";
 
 if ( len(sys.argv) != 3 ):
-	print "usage: cloakify.py <payloadFilename> <cipherFilename>"
-	exit
+	print("usage: cloakify.py <payloadFilename> <cipherFilename>")
+	exit()
 
 else:
-	base64.encode( open( sys.argv[1] ), open( payloadB64, "w" ))
+	base64.encode( open( sys.argv[1], 'rb' ), open( payloadB64, "wb" ))
 
 	with open( payloadB64 ) as file:
 		payloadCloaked = file.read()
@@ -58,7 +59,7 @@ else:
 
 	for char in payloadCloaked:
 		if char != '\n':
-			print arrayCipher[ array64.index(char) ],
+			print(arrayCipher[ array64.index(char) ], end='')
 
 	if os.path.exists( payloadB64 ):
 		os.remove( payloadB64 )
