@@ -10,7 +10,7 @@
 # of words / phrases / Unicode to ease exfiltration of data across monitored networks, 
 # essentially hiding the data in plain sight, and facilitates social engineering attacks 
 # against human analysts and their workflows. Bonus Feature: Defeats signature-based 
-# malware detection tools (cloak your other tools.
+# malware detection tools (cloak your other tools).
 #
 # Description:  Base64-encodes the given payload and translates the output using a list 
 # of words/phrases/Unicode provided in the cipher. This is NOT a secure encryption tool, 
@@ -18,10 +18,10 @@
 # analysis attacks). You can of course use an encrypted file as the payload, however.
 #
 # Prepackaged ciphers include: lists of desserts in English, Arabic, Thai, Russian, 
-# Hindi, Chinese, Persian, and Muppet (Swedish Chef); Top 100 IP Addresses; GeoCoords of 
-# World Capitols; MD5 Password Hashes; An Emoji cipher; Star Trek characters; Geocaching 
-# Locations; Amphibians (Scientific Names); and evadeAV cipher, a simple cipher that 
-# minimizes the size of the resulting obfuscated data.
+# Hindi, Chinese, Persian, and Muppet (Swedish Chef); PokemonGo creatures; Top 100 IP 
+# Addresses; Top Websites; GeoCoords of World Capitols; MD5 Password Hashes; An Emoji 
+# cipher; Star Trek characters; Geocaching Locations; Amphibians (Scientific Names); 
+# evadeAV cipher (simple cipher that minimizes size of the resulting obfuscated data).
 #
 # To create your own cipher:
 #
@@ -34,9 +34,10 @@
 #
 #   $ ./cloakify.py payload.txt ciphers/desserts.ciph > exfiltrate.txt
 # 
-# Current Limitations (to be fixed in future development):
+# Current Limitations:
 #
-# 	- Vulnerable to frequency analysis attacks
+# 	- Vulnerable to frequency analysis attacks, use scripts in 'addNoise' directory
+#	  to add entropy to your cloaked payloads (must strip away prior to decloaking)
 #	- Creates temporary Base64 file in local directory and deletes when finished,
 #	  but does not do "secure delete" (potential digital forensics trail)
 
