@@ -2,6 +2,8 @@
 # 
 # Filename:  cloakify.py 
 #
+# Version: 1.0.1
+#
 # Author:  Joe Gervais (TryCatchHCF)
 #
 # Summary:  Exfiltration toolset (see decloakify.py) that transforms data into lists 
@@ -41,24 +43,24 @@
 import os, sys, getopt, base64
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
-payloadB64 = "payloadB64.txt";
+payloadB64File = "payloadB64.txt";
 
 if ( len(sys.argv) != 3 ):
 	print "usage: cloakify.py <payloadFilename> <cipherFilename>"
 	exit
 
 else:
-	base64.encode( open( sys.argv[1] ), open( payloadB64, "w" ))
+	base64.encode( open( sys.argv[1] ), open( payloadB64File, "w" ))
 
-	with open( payloadB64 ) as file:
-    		payloadCloaked = file.read()
+	with open( payloadB64File ) as file:
+    		payloadB64 = file.read()
 
 	with open( sys.argv[2]) as file:
     		arrayCipher = file.readlines()
 
-	for char in payloadCloaked:
+	for char in payloadB64:
 		if char != '\n':
 			print arrayCipher[ array64.index(char) ],
 
-	if os.path.exists( payloadB64 ):
-    		os.remove( payloadB64 )
+	if os.path.exists( payloadB64File ):
+    		os.remove( payloadB64File )
