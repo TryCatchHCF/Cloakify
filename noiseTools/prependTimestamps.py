@@ -18,6 +18,8 @@
 # timestamps into the future.
 #
 # Example:  
+#
+#   $ ./prependTimestamps.py cloaked.txt > exfiltrateMe.txt
 # 
 #   Remove timestamps before trying to decloak the file
 #
@@ -44,7 +46,8 @@ else:
 
 	# Set the start date back around 3 years from today
 	# Randomize a little for each run to avoid a pattern in the first line of each file
-  today = datetime.date.today()
+
+	today = datetime.date.today()
 	startDate = today - datetime.timedelta(days=random.randint(minDaysBack,maxDaysBack))
 	step = datetime.timedelta(seconds=random.randint(minSecondsStep,maxSecondsStep))
 	t = datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) )
@@ -57,3 +60,4 @@ else:
 		if fakeDate.date() > today:
 			startDate = today - datetime.timedelta(days=random.randint(minDaysBack,maxDaysBack))
 			fakeDate = datetime.datetime.combine( startDate, datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) ) )
+

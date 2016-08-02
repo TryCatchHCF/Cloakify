@@ -11,17 +11,27 @@
 # frequency analysis attacks against the cloaked payload.
 #
 # Description:  
-# Uses a bounding rectangle to generate random lat/lon coordinate pairs.
+# Uses a bounding rectangle to generate random lat/lon coordinate pairs and
+# insert them in the front of each line in a file. Defaults to Denver, with a 
+# bounding rectangle roughly 10 miles / 16km per side (varies with latitude, 
+# because sphere.
 #
 # Example:  
 #
 #   $ ./prependLatLonCoords.py cloaked.txt > exfiltrateMe.txt
 # 
+#   Remove coordinate pairs before trying to decloak the file
+#
+#   $ cat exfiltrateMe.txt | cut -d" " -f 3- > cloaked.txt
+
 
 import os, sys, getopt, random
 
 if ( len(sys.argv) != 2 ):
 	print "usage: prependLatLonCoords.py <cloakedFilename>"
+	print
+	print "Strip the coordinates prior to decloaking the cloaked file."
+	print
 	exit
 
 else:
@@ -38,6 +48,8 @@ else:
 
 	sizeLat = 0.0002
 	sizeLon = 0.0002
+
+	# Generate a random with enough range to look good, scale with vals above
 
 	for i in cloakedFile:
 		lat = baseLat + (sizeLat * random.randint(0,2000))
