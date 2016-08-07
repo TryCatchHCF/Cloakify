@@ -1,0 +1,2 @@
+$ shasum -a 256 DefCon24_Cloakify_Exfiltration_Toolset.pdf 
+d0d737a7a43dd8453a60eeda187b53a3384e2815e5f6bbf9a38bb97ba45dd535  DefCon24_Cloakify_Exfiltration_Toolset.pdf
