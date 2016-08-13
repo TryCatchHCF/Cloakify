@@ -72,6 +72,10 @@ Pass the new file as the cipher argument to cloakify / decloakify
 #Decloakify Example
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/decloak.png></img>
 
+#Adding Entropy
+Add noise to degrade frequency analysis attacks against your cloaked payloads. Here we use the 'pokemonGo' cipher, then use the 'prependLatLonCoords.py' script to generate random geocoords in a 10x10 mile grid
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/pokemonGo.png></img>
+
 #Cipher Gallery
 
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples1.png></img>
