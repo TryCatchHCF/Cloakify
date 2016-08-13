@@ -7,9 +7,9 @@ Joe Gervais (TryCatchHCF)
 # Why
 
 DLP systems, MLS devices, and SecOps analysts know what data to look for: 
-<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/payloadExample.png></img>
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/payloadAcctSpreadsheet.png></img>
 So transform that data into something they're <b>not</b> looking for: 
-<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloakedExample.png></img>
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloakedAcctSpreadsheet.png></img>
 
 #Tutorial
 See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what Cloakify can do, specific use cases, and more.
