@@ -67,59 +67,12 @@ See script comments for details on how to tailor the output for your own needs
 Pass the new file as the cipher argument to cloakify / decloakify
 
 #Cloakify Example
-<pre>
-$ cat payload.txt
-The FBI just filed a motion to delay Tuesday's hearing in the San
-Bernardino iPhone case, claiming that an "outside party" may be able to
-help it break into the phone without Apple's help. The motion comes
-after weeks of escalation tension in the case with Apple, the FBI, and
-other stakeholders arguing the case in public before it reached courts.
-It's not clear who is helping the FBI or what the new method entails,
-but it may not be coming from the NSA, despite speculation that the
-intelligence agency has the ability up its sleeve; today's filing
-suggests that the help is coming from "outside the US government."
-$ ./cloakify.py payload.txt ciphers/desserts.ciph > cloaked.txt
-$ head cloaked.txt
-streusel
-biscuits
-flower
-marionberry
-puffs
-buttermilk
-terrine
-eggs
-muffins
-snickerdoodles
-$
-</pre>
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloak.png></img>
 
 #Decloakify Example
-<pre>
-$ head cloaked.txt
-streusel
-biscuits
-flower
-marionberry
-puffs
-buttermilk
-terrine
-eggs
-muffins
-snickerdoodles
-$ ./decloakify.py cloaked.txt ciphers/desserts.ciph
-The FBI just filed a motion to delay Tuesday's hearing in the San
-Bernardino iPhone case, claiming that an "outside party" may be able to
-help it break into the phone without Apple's help. The motion comes
-after weeks of escalation tension in the case with Apple, the FBI, and
-other stakeholders arguing the case in public before it reached courts.
-It's not clear who is helping the FBI or what the new method entails,
-but it may not be coming from the NSA, despite speculation that the
-intelligence agency has the ability up its sleeve; today's filing
-suggests that the help is coming from "outside the US government."
-$
-</pre>
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/decloak.png></img>
 
-# Cipher Gallery
+#Cipher Gallery
 
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples1.png></img>
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples2.png></img>
