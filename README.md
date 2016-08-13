@@ -1,5 +1,5 @@
 # Cloakify
-Cloakify Toolset - Data Exfiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Evade AV Detection. Text-based steganography usings lists. Convert any file type (e.g. executables, Office, Zip, images) into a list of strings. Very simple tools, powerful concept, limited only by your imagination. 
+Cloakify Toolset - Data Exfiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Evade AV Detection. Text-based steganography usings lists. Convert any file type (e.g. executables, Office, Zip, images) into a list of everyday strings. Very simple tools, powerful concept, limited only by your imagination. 
 
 # Author
 Joe Gervais (TryCatchHCF)
@@ -52,7 +52,7 @@ and Muppet (Swedish Chef)
 Pass the new file as the cipher argument to cloakify / decloakify
 
 #Tutorial
-See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop, and DemoLabs. Complete tutorial on what Cloakify can do, specific use cases, and more.
+See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what Cloakify can do, specific use cases, and more.
 
 #Cloakify Example
 <pre>
