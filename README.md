@@ -12,7 +12,7 @@ So transform that data into something they're <b>not</b> looking for:
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloakedExample.png></img>
 
 # Description
-Python scripts to cloak / uncloak payloads using list-based ciphers
+Python scripts to cloak / uncloak any file type using list-based ciphers
 (text-based steganography). Allows you to transfer data across a secure
 network’s perimeter without triggering alerts, defeating data
 whitelisting controls, and derailing analyst’s review via social
@@ -50,6 +50,9 @@ and Muppet (Swedish Chef)
 - Remove all duplicate entries and all blank lines
 
 Pass the new file as the cipher argument to cloakify / decloakify
+
+#Tutorial
+See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop, and DemoLabs. Complete tutorial on what Cloakify can do, specific use cases, and more.
 
 #Cloakify Example
 <pre>
