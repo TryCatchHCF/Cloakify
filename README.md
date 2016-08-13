@@ -11,6 +11,9 @@ DLP systems, MLS devices, and SecOps analysts know what data to look for:
 So transform that data into something they're <b>not</b> looking for: 
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloakedExample.png></img>
 
+#Tutorial
+See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what Cloakify can do, specific use cases, and more.
+
 # Description
 Python scripts to cloak / uncloak any file type using list-based ciphers
 (text-based steganography). Allows you to transfer data across a secure
@@ -24,8 +27,8 @@ generate a list of strings that encodes the Base64 payload. Once
 exfiltrated, use Decloakify with the same cipher to decode the payload.
 
 Not a secure encryption scheme (vulnerable to frequency analysis
-attacks). Encrypt data separately prior to processing to keep secure
-(if needed).
+attacks, use 'noiseTools' scripts to add entropy). Encrypt data separately 
+prior to processing to keep secure (if needed).
 
 Very small, simple, clean, portable - written in Python. Can quickly
 type into a target’s local shell session if needed.
@@ -37,12 +40,24 @@ Prepackaged ciphers include lists of:
 and Muppet (Swedish Chef)
 - IPv4 Addresses of Popular Websites
 - GeoCoords World Capitals (Lat/Lon)
+- PokemonGo Monsters
 - MD5 Password Hashes
 - Emoji
+- World Cup Teams
+- Belgian Beers
+- Ski Resorts
+- World Beaches
 - Amphibians (scientific names)
 - GeoCaching Coordinates (w/ Site Names)
 - Star Trek characters
 - evadeAV (smallest cipher space - x3 payload size - purely to evade AV detection)
+
+Prepackaged scripts for adding noise / entropy to your cloaked payloads:
+- prependID.py: Adds a randomized ID tag to front of each line 
+- prependLatLonCoords.py: Adds randomized LatLong coordinates to front of each line
+- prependTimestamps.py: Adds timestamps (log file style) to front of each line
+
+See script comments for details on how to tailor the output for your own needs
 
 # To create your own cipher
 - Generate a list of at least 66 unique words / phrases / symbols (Unicode accepted)
@@ -50,9 +65,6 @@ and Muppet (Swedish Chef)
 - Remove all duplicate entries and all blank lines
 
 Pass the new file as the cipher argument to cloakify / decloakify
-
-#Tutorial
-See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what Cloakify can do, specific use cases, and more.
 
 #Cloakify Example
 <pre>
