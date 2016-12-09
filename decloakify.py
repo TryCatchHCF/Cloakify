@@ -10,6 +10,8 @@
 # against human analysts and their workflows. Bonus Feature: Defeats signature-based 
 # malware detection tools (cloak your other tools).
 #
+# Used by cloakifyFactory.py, can be used as a standalone script as well (example below).
+#
 # Description:  Decodes the output of cloakify.py into its underlying Base64 format, 
 # then does Base64 decoding to unpack the cloaked payload file. Requires the use of the 
 # same cipher that was used to cloak the file prior to exfitration, of course.
@@ -29,15 +31,12 @@ import sys, getopt, base64
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
 
-if ( len(sys.argv) != 3 ):
-	print "usage: decloakify.py <cloakedFilename> <cipherFilename>"
-	exit
+def Decloakify( arg1, arg2, arg3 ):
 
-else:
-	with open( sys.argv[1]) as file:
+	with open( arg1 ) as file:
     		listExfiltrated = file.readlines()
 
-	with open( sys.argv[2]) as file:
+	with open( arg2) as file:
     		arrayCipher = file.readlines()
 
 	clear64 = ""
@@ -45,4 +44,18 @@ else:
 	for word in listExfiltrated:
 		clear64 +=  array64[ arrayCipher.index(word) ]
 
-	print base64.b64decode( clear64 )
+	if ( arg3 != "" ):
+		with open( arg3, "w" ) as outFile:
+			outFile.write( base64.b64decode( clear64 ))
+
+	else:
+		print base64.b64decode( clear64 ),
+
+
+if __name__ == "__main__":
+        if (len(sys.argv) != 3):
+                print "usage: decloakify.py <cloakedFilename> <cipherFilename>"
+                exit
+	else:
+        	Decloakify( sys.argv[1], sys.argv[2], "" )
+

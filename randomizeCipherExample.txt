@@ -1,0 +1,8 @@
+# The following example perl command will take its file argument and output 
+# the lines of the file in a random order
+# 
+# Replace "fileToRandomize.txt" with the name of the cipher file you want
+# to randomize, and save the output to a new file. Put that new file in the 
+# "ciphers/" directory and your newly scrambled cipher is ready to use.
+
+perl -wl -e '@f=<>; for $i (0 .. $#f) { $r=int rand ($i+1); @f[$i, $r]=@f[$r,$i] if ($i!=$r); } chomp @f; print join $/, @f;' fileToRandomize.txt
