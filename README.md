@@ -12,9 +12,9 @@ So transform that data into something they're <b>not</b> looking for:
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/CloakifyFactoryWorkflow.png></img>
 
 # Tutorial
-See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what Cloakify can do, specific use cases, and more.
+See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what the Cloakify Toolset can do, specific use cases, and more. (Covers the standalone scripts, recommend using the new CloakifyFactory to streamline your efforts.)
 
-For a quick start, see the cleverly titled file "README_GETTING_STARTED.txt" in the project for a walkthrough of Cloakify Factory.
+For a quick start on CloakifyFactory, see the cleverly titled file "README_GETTING_STARTED.txt" in the project for a walkthrough.
 
 # Overview
 CloakifyFactory transforms any filetype (e.g. .zip, .exe, .xls, etc.) into a list of harmless-looking strings. This lets you hide the file in plain sight, and transfer the file without triggering alerts. The fancy term for this is "text-based steganography", hiding data by making it look like other data. For example, you can transform a .zip file into a list of Pokemon creatures or Top 100 Websites. You then transfer the cloaked file however you choose, and then decloak the exfiltrated file back into its original form. 
