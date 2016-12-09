@@ -12,7 +12,7 @@ So transform that data into something they're <b>not</b> looking for:
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/CloakifyFactoryWorkflow.png></img>
 
 # Tutorial
-See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what the Cloakify Toolset can do, specific use cases, and more. (Covers the standalone scripts, recommend using the new CloakifyFactory to streamline your efforts.)
+See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what the Cloakify Toolset can do, specific use cases, and more. (The examples in the presentation use the standalone scripts, I recommend using the new CloakifyFactory to streamline your efforts.)
 
 For a quick start on CloakifyFactory, see the cleverly titled file "README_GETTING_STARTED.txt" in the project for a walkthrough.
 
