@@ -1,3 +1,0 @@
-# Example perl command to randomize lines of a file
-
-perl -wl -e '@f=<>; for $i (0 .. $#f) { $r=int rand ($i+1); @f[$i, $r]=@f[$r,$i] if ($i!=$r); } chomp @f; print join $/, @f;' fileToRandomize.txt
