@@ -1,5 +1,5 @@
-# Cloakify Factory
-Cloakify Factory & Cloakify Toolset - Data Exfiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Defeat Data Whitelisting Controls; Evade AV Detection. Text-based steganography usings lists. Convert any file type (e.g. executables, Office, Zip, images) into a list of everyday strings. Very simple tools, powerful concept, limited only by your imagination. 
+# CloakifyFactory
+CloakifyFactory & the Cloakify Toolset - Data Exfiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Defeat Data Whitelisting Controls; Evade AV Detection. Text-based steganography usings lists. Convert any file type (e.g. executables, Office, Zip, images) into a list of everyday strings. Very simple tools, powerful concept, limited only by your imagination. 
 
 # Author
 Joe Gervais (TryCatchHCF)
@@ -11,23 +11,25 @@ DLP systems, MLS devices, and SecOps analysts know what data to look for:
 So transform that data into something they're <b>not</b> looking for: 
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/CloakifyFactoryWorkflow.png></img>
 
-#Tutorial
+# Tutorial
 See my DEF CON 24 slides (included in project) from Crypto & Privacy Village workshop and DemoLabs session. Complete tutorial on what Cloakify can do, specific use cases, and more.
 
 For a quick start, see the cleverly titled file "README_GETTING_STARTED.txt" in the project for a walkthrough of Cloakify Factory.
 
 # Overview
-Cloakify Factory transforms any filetype (e.g. .zip, .exe, .xls, etc.) into a list of harmless-looking strings. This lets you hide the file in plain sight, and transfer the file without triggering alerts. The fancy term for this is "text-based steganography", hiding data by making it look like other data. For example, you can transform a .zip file into a list of Pokemon creatures or Top 100 Websites. You then transfer the cloaked file however you choose, and then decloak the exfiltrated file back into its original form. 
+CloakifyFactory transforms any filetype (e.g. .zip, .exe, .xls, etc.) into a list of harmless-looking strings. This lets you hide the file in plain sight, and transfer the file without triggering alerts. The fancy term for this is "text-based steganography", hiding data by making it look like other data. For example, you can transform a .zip file into a list of Pokemon creatures or Top 100 Websites. You then transfer the cloaked file however you choose, and then decloak the exfiltrated file back into its original form. 
 
 With your payload cloaked, you can transfer data across a secure network’s perimeter without triggering alerts. You can also defeat data whitelisting controls - is there a security device that only allows IP addresses to leave a network? Turn your payload into IP addresses, problem solved. Additionaly, you can derail the security analyst’s review via social engineering attacks against their workflows. And as a final bonus, cloaked files defeat signature-based malware detection tools.
 
 The pre-packaged ciphers are designed to appear like harmless / ignorable lists, though some (like MD5 password hashes) are specifically meant as distracting bait.
 
+CloakifyFactory is also a great way to introduce people to crypto and steganography concepts. It's simple to use, guides the user through the process, and according to our kids is also fun!
+
 # Requires
 Python 2.7.x
 
-# Run Cloakify Factory: 
-% ./cloakifyFactory.py
+# Run Cloakify Factory
+$ ./cloakifyFactory.py
 
 # Description
 CloakifyFactory is a menu-driven tool that leverages Cloakify Toolset scripts. When you choose to Cloakify a file, the scripts  first Base64-encodes the payload, then apply a cipher to generate a list of strings that encodes the Base64 payload. You then transfer the file however you wish to its desired destination. Once exfiltrated, choose Decloakify with the same cipher to decode the payload.
@@ -62,11 +64,11 @@ Prepackaged scripts for adding noise / entropy to your cloaked payloads:
 - prependLatLonCoords.py: Adds randomized LatLong coordinates to each line
 - prependTimestamps.py: Adds timestamps (log file style) to each line
 
-See comments script file for details on how to tailor the Noise Generators for your own needs
+See comments in each script for details on how to tailor the Noise Generators for your own needs
 
 # Create Your Own Cipers
 
-Cloakify Factory is at its best when you're using your own customized ciphers. The default ciphers may work for most needs, but in a unique exfiltration scenario you may need to build your own.
+Cloakify Factory is at its best when you're using your own customized ciphers. The default ciphers may work for most needs, but in a unique exfiltration scenario you may need to build your own. At the very least, you can copy a prepackaged cipher and randomize the order.
 
 Creating a Cipher:
 - Generate a list of at least 66 unique words / phrases / symbols (Unicode accepted)
@@ -76,17 +78,22 @@ Creating a Cipher:
 - Re-run CloakifyFactory and it will automatically load your new cipher as an option
 - Test cloaking / decloaking with new cipher before using operationally
 
-#Cloakify Example
-<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloak.png></img>
-
-#Decloakify Example
-<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/decloak.png></img>
-
-#Adding Entropy
-Add noise to degrade frequency analysis attacks against your cloaked payloads. Here we use the 'pokemonGo' cipher, then use the 'prependLatLonCoords.py' script to generate random geocoords in a 10x10 mile grid. (Strip noise from file before decloaking.)
-<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/pokemonGoExample.png></img>
-
-#Sample Cipher Gallery
+# Sample Cipher Gallery
 
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples1.png></img>
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples2.png></img>
+
+# Standalone Scripts
+Some of you may prefer to use the Cloakify Toolset scripts in standalone mode. The toolset is designed to support that.
+
+# cloakify.py Example
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/cloak.png></img>
+
+# decloakify.py Example
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/decloak.png></img>
+
+# Adding Entropy via Standalone Scripts
+Add noise to degrade frequency analysis attacks against your cloaked payloads. Here we use the 'pokemonGo' cipher, then use the 'prependLatLonCoords.py' script to generate random geocoords in a 10x10 mile grid. (Strip noise from the file before decloaking, using the 'removeNoise.py' script.)
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/pokemonGoExample.png></img>
+
+
