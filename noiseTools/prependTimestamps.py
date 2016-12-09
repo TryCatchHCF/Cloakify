@@ -2,7 +2,7 @@
 # 
 # Filename:  prependTimestamps.py
 #
-# Version: 1.0.0
+# Version: 1.0.1
 #
 # Author:  Joe Gervais (TryCatchHCF)
 #
@@ -33,7 +33,7 @@ maxDaysBack = 1104
 minSecondsStep = 0
 maxSecondsStep = 664
 
-if ( len(sys.argv) != 2 ):
+if ( len(sys.argv) > 2 ):
 	print "usage: prependTimestamps.py <cloakedFilename>"
 	print
 	print "Strip timestamps prior to decloaking the cloaked file."
@@ -41,10 +41,7 @@ if ( len(sys.argv) != 2 ):
 	exit
 
 else:
-	with open( sys.argv[1] ) as file:
-    		cloakedFile = file.readlines()
-
-	# Set the start date back around 3 years from today
+	# Set the start date back around 2 years from today (give or take) for entropy range
 	# Randomize a little for each run to avoid a pattern in the first line of each file
 
 	today = datetime.date.today()
@@ -53,11 +50,27 @@ else:
 	t = datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) )
 	fakeDate = datetime.datetime.combine( startDate, t )
 
-	for i in cloakedFile:
-		print fakeDate, i,
-		step = datetime.timedelta(seconds=random.randint(minSecondsStep,maxSecondsStep))
-		fakeDate += step
-		if fakeDate.date() > today:
-			startDate = today - datetime.timedelta(days=random.randint(minDaysBack,maxDaysBack))
-			fakeDate = datetime.datetime.combine( startDate, datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) ) )
+	if ( len(sys.argv) == 1 ):
+	# Generate sample of noise generator output
+		i = 0;
+		while (i<20):
+			print( str( fakeDate ))
+			step = datetime.timedelta(seconds=random.randint(minSecondsStep,maxSecondsStep))
+			fakeDate += step
+			i = i+1
+		
+
+	else:
+	# Prepend noise generator output to file
+		with open( sys.argv[1] ) as file:
+    			cloakedFile = file.readlines()
+
+		with open( sys.argv[1], "w" ) as file:
+			for i in cloakedFile:
+				file.write( str( fakeDate ) + " " + i )
+				step = datetime.timedelta(seconds=random.randint(minSecondsStep,maxSecondsStep))
+				fakeDate += step
+				if fakeDate.date() > today:
+					startDate = today - datetime.timedelta(days=random.randint(minDaysBack,maxDaysBack))
+					fakeDate = datetime.datetime.combine( startDate, datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) ) )
 

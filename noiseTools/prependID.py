@@ -2,7 +2,7 @@
 # 
 # Filename:  prependID.py
 #
-# Version: 1.0.0
+# Version: 1.0.1
 #
 # Author:  Joe Gervais (TryCatchHCF)
 #
@@ -12,7 +12,7 @@
 #
 # Description:  
 # Generates a random 4-character ID and prints it in front of each line of the
-# file, in the form of "Tag:WXYZ". Modify the print statement below to tailor
+# file, in the form of "Tag:WXYZ". Modify the write statement below to tailor
 # to your needs.
 # 
 # Example:  
@@ -27,7 +27,7 @@ import os, sys, getopt, codecs, random
 
 arrayCode = list ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
-if ( len(sys.argv) != 2 ):
+if ( len(sys.argv) > 2 ):
 	print "usage: prepend4digitID.py <exfilFilename>"
 	print
 	print "Strip tag prior to decloaking the cloaked file."
@@ -35,9 +35,29 @@ if ( len(sys.argv) != 2 ):
 	exit
 
 else:
-	with open( sys.argv[1] ) as file:
-    		exfilFile = file.read().splitlines()
 
-	for i in exfilFile:
-		if i != '\n':
-			print 'Tag:%c%c%c%c %s' % (random.choice(arrayCode),random.choice(arrayCode),random.choice(arrayCode),random.choice(arrayCode),i)
+	if ( len(sys.argv) == 1):
+
+		i = 0
+		while ( i<20 ):
+
+			print( "Tag: " + 
+				random.choice(arrayCode) + 
+				random.choice(arrayCode) + 
+				random.choice(arrayCode) + 
+				random.choice(arrayCode))
+			i = i+1
+
+	else:
+		with open( sys.argv[1] ) as file:
+    			exfilFile = file.read().splitlines()
+
+		with open( sys.argv[1], "w" ) as file:
+			for i in exfilFile:
+				if i != '\n':
+					file.write( "Tag: " + 
+						random.choice(arrayCode) + 
+						random.choice(arrayCode) + 
+						random.choice(arrayCode) + 
+						random.choice(arrayCode) + 
+						" " + i + "\n" )

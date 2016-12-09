@@ -2,7 +2,7 @@
 # 
 # Filename:  prependLatLonCoords.py
 #
-# Version: 1.0.0
+# Version: 1.0.1
 #
 # Author:  Joe Gervais (TryCatchHCF)
 #
@@ -27,7 +27,7 @@
 
 import os, sys, getopt, random
 
-if ( len(sys.argv) != 2 ):
+if ( len(sys.argv) > 2 ):
 	print "usage: prependLatLonCoords.py <cloakedFilename>"
 	print
 	print "Strip the coordinates prior to decloaking the cloaked file."
@@ -35,9 +35,6 @@ if ( len(sys.argv) != 2 ):
 	exit
 
 else:
-	with open( sys.argv[1] ) as file:
-    		cloakedFile = file.readlines()
-
 	# Geocoords for Denver, USA. Replace with whatever is best for your needs
 	baseLat = 39.739236
 	baseLon = -104.990251
@@ -49,11 +46,24 @@ else:
 	sizeLat = 0.0002
 	sizeLon = 0.0002
 
-	# Generate a random with enough range to look good, scale with vals above
+	if ( len(sys.argv) == 1):
+		i = 0
+		while (i<20):
+			lat = baseLat + (sizeLat * random.randint(0,2000))
+			lon = baseLon + (sizeLon * random.randint(0,2000))
+			print( str( lat ) + " " + str( lon ))
+			i = i+1
 
-	for i in cloakedFile:
-		lat = baseLat + (sizeLat * random.randint(0,2000))
-		lon = baseLon + (sizeLon * random.randint(0,2000))
+	else:
+		with open( sys.argv[1], "r" ) as file:
+    			cloakedFile = file.readlines()
 
-		print lat, lon, i,
+		with open( sys.argv[1], "w" ) as file:
+			# Generate a random with enough range to look good, scale with vals above
+
+			for i in cloakedFile:
+				lat = baseLat + (sizeLat * random.randint(0,2000))
+				lon = baseLon + (sizeLon * random.randint(0,2000))
+
+				file.write( str( lat ) + " " + str( lon ) + " " + i )
 
