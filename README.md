@@ -93,7 +93,7 @@ Some of you may prefer to use the Cloakify Toolset scripts in standalone mode. T
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/decloak.png></img>
 
 # Adding Entropy via Standalone Scripts
-Add noise to degrade frequency analysis attacks against your cloaked payloads. Here we use the 'pokemonGo' cipher, then use the 'prependLatLonCoords.py' script to generate random geocoords in a 10x10 mile grid. (Strip noise from the file before decloaking, using the 'removeNoise.py' script.)
+Add noise to degrade frequency analysis attacks against your cloaked payloads. Here we use the 'pokemonGo' cipher, then use the 'prependLatLonCoords.py' script to generate random geocoords in a 10x10 mile grid. Strip noise from the file before decloaking, using the 'removeNoise.py' script. Or of course "$ cat cloakedAndNoisy.txt | cut -d" " -f3- > cloakedNoiseStripped.txt"
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/pokemonGoExample.png></img>
 
 
