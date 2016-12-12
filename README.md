@@ -80,8 +80,8 @@ Creating a Cipher:
 
 # Sample Cipher Gallery
 
-<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples1.png></img>
-<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/Samples2.png></img>
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/CipherGallery1.png></img>
+<img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/CipherGallery2.png></img>
 
 # Standalone Scripts
 Some of you may prefer to use the Cloakify Toolset scripts in standalone mode. The toolset is designed to support that.
