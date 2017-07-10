@@ -24,6 +24,7 @@
 #   Remove timestamps before trying to decloak the file
 #
 #   $ cat exfiltrateMe.txt | cut -d" " -f 3- > cloaked.txt
+# Updated to Python3 by John Aho
 
 import os, sys, getopt, datetime, random
 
