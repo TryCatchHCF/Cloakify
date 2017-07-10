@@ -20,8 +20,8 @@
 import os, sys, getopt
 
 if ( len(sys.argv) != 4 ):
-	print "usage: removeNoise.py <numberOfColumnsToStrip> <noisyFilename> <outputFile>"
-	print
+	print("usage: removeNoise.py <numberOfColumnsToStrip> <noisyFilename> <outputFile>")
+	print()
 	exit
 
 else:
