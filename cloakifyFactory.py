@@ -119,7 +119,11 @@ def DecloakifyFile():
 	print ""
 	decloakedFile = raw_input( "Save decloaked data to filename (default: 'decloaked.file'): " )
 	print ""
-
+	
+	# Create temp file with copy so that it can be manipulated by noise and decloakify
+	from shutil import copyfile
+	copyfile(sourceFile,decloakTempFile)
+	
 	if decloakedFile == "":
 		decloakedFile = "decloaked.file"
 
