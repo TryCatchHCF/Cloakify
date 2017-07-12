@@ -100,4 +100,4 @@ Or of course: $ cat cloakedAndNoisy.txt | cut -d" " -f3- > cloakedNoiseStripped.
 
 
 
-# Updated to python3 by John Aho
+* Updated to python3 by John Aho
