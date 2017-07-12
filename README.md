@@ -99,3 +99,5 @@ Or of course: $ cat cloakedAndNoisy.txt | cut -d" " -f3- > cloakedNoiseStripped.
 <img src=https://github.com/TryCatchHCF/Cloakify/blob/master/screenshots/pokemonGoExample.png></img>
 
 
+
+# Updated to python3 by John Aho
