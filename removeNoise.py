@@ -28,7 +28,7 @@ else:
 	numberOfColumnsToStrip = int( sys.argv[1] )
 
 	with open( sys.argv[2] ) as file:
-    		noisyFile = file.readlines()
+		noisyFile = file.readlines()
 		file.close()
 
 	with open( sys.argv[3], "w" ) as file:
