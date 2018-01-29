@@ -36,7 +36,7 @@ CloakifyFactory is a menu-driven tool that leverages Cloakify Toolset scripts. W
 
 NOTE: Cloakify is not a secure encryption scheme. It's vulnerable to frequency analysis attacks. Use the 'Add Noise' option to add entropy when cloaking a payload to help degrade frequency analysis attacks. Be sure to encrypt the file prior to cloaking if secrecy is needed.
 
-The supporting scripts (cloakify.py and decloakify.py) can be use as standalone scripts. Very small, simple, clean, portable. For scenarios where infiltrating the full toolset is impractical, you can quickly type the standalone into a target’s local shell, generate a cipher in place, and cloakify -> exfiltrate.
+The supporting scripts (cloakify.py and decloakify.py) can be used as standalone scripts. Very small, simple, clean, portable. For scenarios where infiltrating the full toolset is impractical, you can quickly type the standalone into a target’s local shell, generate a cipher in place, and cloakify -> exfiltrate.
 
 Use py2exe if Windows target lacks Python. (http://www.py2exe.org/)
 
