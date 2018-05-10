@@ -2,7 +2,7 @@
 # 
 # Filename:  cloakifyFactory.py 
 #
-# Version: 1.0.0
+# Version: 1.0.1
 #
 # Author:  Joe Gervais (TryCatchHCF)
 #
@@ -158,6 +158,9 @@ def DecloakifyFile():
 				# Remove Noise, overwrite the source file with the stripped contents
 				print "Removing noise from noise generator:", gNoiseScripts[ noiseNum ]
 				os.system( "./removeNoise.py %s %s %s" % ( stripColumns, sourceFile, decloakTempFile ))
+
+				# Copy decloak temp filename to sourceFile so that Decloakify() gets the right filename
+				sourceFile = decloakTempFile
 			except:
 				print "!!! Error while removing noise from file. Was calling 'removeNoise.py'.\n"
 
@@ -167,7 +170,7 @@ def DecloakifyFile():
 
 	# Call Decloakify()
 	try:
-		decloakify.Decloakify( decloakTempFile, "ciphers/" + gCipherFiles[ cipherNum ], decloakedFile )
+		decloakify.Decloakify( sourceFile, "ciphers/" + gCipherFiles[ cipherNum ], decloakedFile )
 
 		print ""
 		print "Decloaked file", sourceFile, ", saved to", decloakedFile
