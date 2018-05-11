@@ -29,7 +29,7 @@ CloakifyFactory is also a great way to introduce people to crypto and steganogra
 Python 2.7.x
 
 # Run Cloakify Factory
-$ ./cloakifyFactory.py
+$ python cloakifyFactory.py
 
 # Description
 CloakifyFactory is a menu-driven tool that leverages Cloakify Toolset scripts. When you choose to Cloakify a file, the scripts  first Base64-encode the payload, then apply a cipher to generate a list of strings that encodes the Base64 payload. You then transfer the file however you wish to its desired destination. Once exfiltrated, choose Decloakify with the same cipher to decode the payload.
@@ -51,6 +51,7 @@ Prepackaged ciphers include lists of:
 - IPv4 Addresses of Popular Websites
 - MD5 Password Hashes
 - PokemonGo Monsters
+- Shortened URLs pointing to different Youtube videos of Rick Astley's "Never Gonna Give You Up"
 - Ski Resorts
 - Status Codes (generic)
 - Star Trek characters
@@ -71,7 +72,7 @@ See comments in each script for details on how to tailor the Noise Generators fo
 Cloakify Factory is at its best when you're using your own customized ciphers. The default ciphers may work for most needs, but in a unique exfiltration scenario you may need to build your own. At the very least, you can copy a prepackaged cipher and randomize the order.
 
 Creating a Cipher:
-- Generate a list of at least 66 unique words / phrases / symbols (Unicode accepted)
+- Generate a list of at least 66 unique words / phrases / symbols (Unicode allowed)
 - Remove all duplicate entries and all blank lines
 - Randomize the list order
 - Place in the "ciphers/" subdirectory
