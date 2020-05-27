@@ -1,10 +1,10 @@
 # CloakifyFactory
-CloakifyFactory & the Cloakify Toolset - Data Exfiltration & Infiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Defeat Data Whitelisting Controls; Evade AV Detection. Text-based steganography using lists. Convert any file type (e.g. executables, Office, Zip, images) into a list of everyday strings. Very simple tools, powerful concept, limited only by your imagination. 
+CloakifyFactory & the Cloakify Toolset - Data Exfiltration & Infiltration In Plain Sight; Evade DLP/MLS Devices; Social Engineering of Analysts; Defeat Data Whitelisting Controls; Evade AV Detection. Text-based steganography using lists. Convert any file type (e.g. executables, Office, Zip, images) into a list of everyday strings. Very simple tools, powerful concept, limited only by your imagination.
+
+(Update 05/27/2020: Yes, I'll be migrating all of my Github projects to Python3 over the summer of 2020.)
 
 # Author
 Joe Gervais (TryCatchHCF)
-
-(Update 05/27/2020: Yes, I'll be migrating all of my Github projects to Python3 over the summer of 2020.)
 
 # Why
 
