@@ -23,15 +23,16 @@
 #   Remove coordinate pairs before trying to decloak the file
 #
 #   $ cat exfiltrateMe.txt | cut -d" " -f 3- > cloaked.txt
+# Updated to Python3 by John Aho
 
 
 import os, sys, getopt, random
 
 if ( len(sys.argv) > 2 ):
-	print "usage: prependLatLonCoords.py <cloakedFilename>"
-	print
-	print "Strip the coordinates prior to decloaking the cloaked file."
-	print
+	print("usage: prependLatLonCoords.py <cloakedFilename>")
+	print()
+	print("Strip the coordinates prior to decloaking the cloaked file.")
+	print()
 	exit
 
 else:
