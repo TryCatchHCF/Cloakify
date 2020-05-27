@@ -4,6 +4,8 @@ CloakifyFactory & the Cloakify Toolset - Data Exfiltration & Infiltration In Pla
 # Author
 Joe Gervais (TryCatchHCF)
 
+(Update 05/27/2020: Yes, I'll be migrating all of my Github projects to Python3 over the summer of 2020.)
+
 # Why
 
 DLP systems, MLS devices, and SecOps analysts know what data to look for: 
