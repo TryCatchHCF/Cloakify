@@ -22,16 +22,17 @@
 #   Remove tag before trying to decloak the file
 #
 #   $ cat exfiltrateMe.txt | cut -d" " -f 2- > cloaked.txt
+# Updated to Python3 by John Aho
 
 import os, sys, getopt, codecs, random
 
 arrayCode = list ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 if ( len(sys.argv) > 2 ):
-	print "usage: prepend4digitID.py <exfilFilename>"
-	print
-	print "Strip tag prior to decloaking the cloaked file."
-	print
+	print("usage: prepend4digitID.py <exfilFilename>")
+	print()
+	print("Strip tag prior to decloaking the cloaked file.")
+	print()
 	exit
 
 else:

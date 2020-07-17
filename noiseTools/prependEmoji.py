@@ -19,14 +19,15 @@
 #   $ ./prependEmoji.py exfiltrate.txt > exfiltrateNew.txt
 # 
 #   Remove prepended emoji before trying to decloak the file
+# Updated to Python3 by John Aho
 
 import os, sys, getopt, random
 
 if ( len(sys.argv) > 2 ):
-	print "usage: prependEmoji.py <exfilFilename>"
-	print
-	print "Strip leading emoji prior to decloaking the cloaked file."
-	print
+	print("usage: prependEmoji.py <exfilFilename>")
+	print()
+	print("Strip leading emoji prior to decloaking the cloaked file.")
+	print()
 	exit
 
 else:

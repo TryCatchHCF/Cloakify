@@ -2,7 +2,7 @@
 # 
 # Filename:  cloakify.py 
 #
-# Version: 1.1.0
+# Version: 1.1.1
 #
 # Author:  Joe Gervais (TryCatchHCF)
 #
@@ -39,6 +39,7 @@
 #
 #   $ ./cloakify.py payload.txt ciphers/desserts > exfiltrate.txt
 # 
+# Updated to Python3 by John Aho
 
 import os, sys, getopt, base64
 
@@ -48,36 +49,37 @@ def Cloakify( arg1, arg2, arg3 ):
 
 	payloadFile = open( arg1, 'rb' )
 	payloadRaw = payloadFile.read()
-	payloadB64 = base64.encodestring( payloadRaw )
+	payloadB64 = base64.encodebytes( payloadRaw)
 
 	try:
 		with open( arg2 ) as file:
     			cipherArray = file.readlines()
 	except:
-		print ""
-		print "!!! Oh noes! Problem reading cipher '", arg2, "'"
-		print "!!! Verify the location of the cipher file" 
-		print ""
+		print("")
+		print("!!! Oh noes! Problem reading cipher '", arg2, "'")
+		print("!!! Verify the location of the cipher file" )
+		print("")
 
 	if ( arg3 != "" ):
 		try:
 			with open( arg3, "w+" ) as outFile:
-				for char in payloadB64:
+				for char2 in payloadB64:
+					char = chr(char2)
 					if char != '\n':
 						outFile.write( cipherArray[ array64.index(char) ] )
-		except:
-			print ""
-			print "!!! Oh noes! Problem opening or writing to file '", arg3, "'"
-			print ""
+		except Exception as ex:
+			print("")
+			print("!!! Oh noes! Problem opening or writing to file '", arg3, "'", ex)
+			print("")
 	else:
 		for char in payloadB64:
 			if char != '\n':
-				print cipherArray[ array64.index(char) ],
+				print( cipherArray[ array64.index(char) ],)
 
 
 if __name__ == "__main__":
 	if ( len(sys.argv) != 3 ):
-		print "usage: cloakify.py <payloadFilename> <cipherFilename>"
+		print("usage: cloakify.py <payloadFilename> <cipherFilename>")
 		exit
 
 	else:

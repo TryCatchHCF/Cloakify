@@ -25,7 +25,7 @@
 # Example:  
 #
 #   $ ./decloakify.py cloakedPayload.txt ciphers/desserts.ciph 
-
+# Updated to Python3 by John Aho
 
 import sys, getopt, base64
 
@@ -45,17 +45,17 @@ def Decloakify( arg1, arg2, arg3 ):
 		clear64 +=  array64[ arrayCipher.index(word) ]
 
 	if ( arg3 != "" ):
-		with open( arg3, "w" ) as outFile:
+		with open( arg3, "wb" ) as outFile:
 			outFile.write( base64.b64decode( clear64 ))
 
 	else:
-		print base64.b64decode( clear64 ),
+		print( base64.b64decode( clear64 ),)
 
 
 if __name__ == "__main__":
-        if (len(sys.argv) != 3):
-                print "usage: decloakify.py <cloakedFilename> <cipherFilename>"
-                exit
-	else:
-        	Decloakify( sys.argv[1], sys.argv[2], "" )
+		if (len(sys.argv) != 3):
+			print("usage: decloakify.py <cloakedFilename> <cipherFilename>")
+			exit
+		else:
+			Decloakify( sys.argv[1], sys.argv[2], "" )
 
