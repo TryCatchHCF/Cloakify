@@ -44,42 +44,50 @@ import os, sys, getopt, base64
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
 
-def Cloakify( arg1, arg2, arg3 ):
+def Cloakify(payloadPath:str, cipherPath:str, outputPath:str=""):
+	"""Payload file's binary contents will be read and converted into base64.
+	Cipher file will be read into a list that will be used for the payload's obfuscation.
+	If an output path is defined the obfuscated content will be written to that otherwise,
+	it will print it out to the console.
 
-	payloadFile = open( arg1, 'rb' )
-	payloadRaw = payloadFile.read()
-	payloadB64 = base64.encodestring( payloadRaw )
+	Args:
+		payloadPath (str): Path to the file that will be encoded
+		cipherPath (str): Path to the file used as the base64 cipher
+		outputPath (str): Path to write out the obfuscated payload
+	"""
 
 	try:
-		with open( arg2 ) as file:
-    			cipherArray = file.readlines()
-	except:
-		print ""
-		print "!!! Oh noes! Problem reading cipher '", arg2, "'"
-		print "!!! Verify the location of the cipher file" 
-		print ""
+		with open(payloadPath, 'rb') as payloadFile:
+			payloadRaw = payloadFile.read()
+			payloadB64 = base64.encodebytes(payloadRaw)
+			payloadB64 = payloadB64.decode("ascii").replace("\n", "")
+	except Exception as e:
+		print("Error reading payload file {}: {}".format(payloadPath, e))
 
-	if ( arg3 != "" ):
+	try:
+		with open(cipherPath, encoding="utf-8") as file:
+			cipherArray = file.readlines()
+	except Exception as e:
+		print("Error reading cipher file {}: {}".format(cipherPath, e))
+
+	if outputPath:
 		try:
-			with open( arg3, "w+" ) as outFile:
+			with open(outputPath, "w+", encoding="utf-8") as outFile:
 				for char in payloadB64:
-					if char != '\n':
-						outFile.write( cipherArray[ array64.index(char) ] )
-		except:
-			print ""
-			print "!!! Oh noes! Problem opening or writing to file '", arg3, "'"
-			print ""
+					outFile.write(cipherArray[array64.index(char)])
+		except Exception as e:
+			print("Error writing to output file {}: {}".format(outputPath, e))
+
 	else:
 		for char in payloadB64:
-			if char != '\n':
-				print cipherArray[ array64.index(char) ],
+			print(cipherArray[array64.index(char)].strip())
 
 
 if __name__ == "__main__":
-	if ( len(sys.argv) != 3 ):
-		print "usage: cloakify.py <payloadFilename> <cipherFilename>"
-		exit
-
+	if len(sys.argv) == 3:
+		Cloakify( sys.argv[1], sys.argv[2])
+	elif len(sys.argv) == 4:
+		Cloakify(sys.argv[1], sys.argv[2], sys.argv[3])
 	else:
-		Cloakify( sys.argv[1], sys.argv[2], "" )
-
+		print("usage: cloakify.py <payloadFilename> <cipherFilename> <outputFileName-optional>")
+		exit(-1)

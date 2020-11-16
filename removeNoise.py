@@ -19,20 +19,16 @@
 
 import os, sys, getopt
 
-if ( len(sys.argv) != 4 ):
-	print "usage: removeNoise.py <numberOfColumnsToStrip> <noisyFilename> <outputFile>"
-	print
-	exit
+def removeNoise(numberOfColumnsToStrip:str, noisyCloakedPath:str, outputPath:str):
+	numberOfColumnsToStrip = int(numberOfColumnsToStrip)
 
-else:
-	numberOfColumnsToStrip = int( sys.argv[1] )
-
-	with open( sys.argv[2] ) as file:
-    		noisyFile = file.readlines()
-		file.close()
-
-	with open( sys.argv[3], "w" ) as file:
+	with open(noisyCloakedPath, encoding="utf-8") as noisyFile, open(outputPath, "w", encoding="utf-8") as outputFile:
 		for line in noisyFile:
-			if line != '\n':
-				file.write( ' '.join(line.split(' ')[numberOfColumnsToStrip:]))
-		file.close()
+			if line != "\n":
+				outputFile.write( ' '.join(line.split(' ')[numberOfColumnsToStrip:]))
+
+
+if __name__ == "__main__":
+	if len(sys.argv) != 4 :
+		print("usage: removeNoise.py <numberOfColumnsToStrip> <noisyFilename> <outputFile>")
+		exit(-1)

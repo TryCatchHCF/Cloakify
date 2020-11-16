@@ -27,43 +27,42 @@
 
 import os, sys, getopt, random
 
-if ( len(sys.argv) > 2 ):
-	print "usage: prependLatLonCoords.py <cloakedFilename>"
-	print
-	print "Strip the coordinates prior to decloaking the cloaked file."
-	print
-	exit
+# Geocoords for Denver, USA. Replace with whatever is best for your needs
+BASE_LAT = 39.739236
+BASE_LON = -104.990251
 
-else:
-	# Geocoords for Denver, USA. Replace with whatever is best for your needs
-	baseLat = 39.739236
-	baseLon = -104.990251
+# AT LATITUDE 40 DEGREES (NORTH OR SOUTH)
+# One minute of latitude =    1.85 km or 1.15 mi
+# One minute of longitude =   1.42 km or 0.88 mi
+SIZE_LAT = 0.0002
+SIZE_LON = 0.0002
 
-	# AT LATITUDE 40 DEGREES (NORTH OR SOUTH)
-	# One minute of latitude =    1.85 km or 1.15 mi
-	# One minute of longitude =   1.42 km or 0.88 mi
 
-	sizeLat = 0.0002
-	sizeLon = 0.0002
-
-	if ( len(sys.argv) == 1):
-		i = 0
-		while (i<20):
-			lat = baseLat + (sizeLat * random.randint(0,2000))
-			lon = baseLon + (sizeLon * random.randint(0,2000))
-			print( str( lat ) + " " + str( lon ))
-			i = i+1
-
+def prependLatLonCoords(cloakedFilename:str):
+	if cloakedFilename:
+		# Prepend noise generator output to file
+		with open(cloakedFilename, encoding="utf-8") as file:
+			cloakedFile = file.readlines()
+	
+		with open(cloakedFilename, "w", encoding="utf-8") as file:
+			for line in cloakedFile:
+				lat = BASE_LAT + (SIZE_LAT * random.randint(0,2000))
+				lon = BASE_LON + (SIZE_LON * random.randint(0,2000))
+				file.write(f"{lat} {lon} {line}"),
 	else:
-		with open( sys.argv[1], "r" ) as file:
-    			cloakedFile = file.readlines()
+		# Generate sample of noise generator output
+		for _ in range(20):
+			lat = BASE_LAT + (SIZE_LAT * random.randint(0,2000))
+			lon = BASE_LON + (SIZE_LON * random.randint(0,2000))
+			print(f"{lat} {lon}")
 
-		with open( sys.argv[1], "w" ) as file:
-			# Generate a random with enough range to look good, scale with vals above
 
-			for i in cloakedFile:
-				lat = baseLat + (sizeLat * random.randint(0,2000))
-				lon = baseLon + (sizeLon * random.randint(0,2000))
-
-				file.write( str( lat ) + " " + str( lon ) + " " + i )
+if __name__ == "__main__":
+	if len(sys.argv) == 2:
+		prependLatLonCoords(sys.argv[1])
+	else:
+		print("usage: prependLatLonCoords.py <exfilFilename>")
+		print()
+		print("Strip leading coordinates prior to decloaking the cloaked file.")
+		print()
 

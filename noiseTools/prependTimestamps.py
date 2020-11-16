@@ -27,50 +27,46 @@
 
 import os, sys, getopt, datetime, random
 
-minDaysBack = 1011
-maxDaysBack = 1104
+MIN_DAYS_BACK = 1011
+MAX_DAYS_BACK = 1104
 
-minSecondsStep = 0
-maxSecondsStep = 664
+MIN_SECONDS_STEP = 0
+MAX_SECONDS_STEP = 664
 
-if ( len(sys.argv) > 2 ):
-	print "usage: prependTimestamps.py <cloakedFilename>"
-	print
-	print "Strip timestamps prior to decloaking the cloaked file."
-	print
-	exit
 
-else:
-	# Set the start date back around 2 years from today (give or take) for entropy range
-	# Randomize a little for each run to avoid a pattern in the first line of each file
+TODAY = datetime.date.today()
+START_DATE = TODAY - datetime.timedelta(days=random.randint(MIN_DAYS_BACK, MAX_DAYS_BACK))
+STEP = datetime.timedelta(seconds=random.randint(MIN_SECONDS_STEP, MAX_SECONDS_STEP))
+T = datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) )
 
-	today = datetime.date.today()
-	startDate = today - datetime.timedelta(days=random.randint(minDaysBack,maxDaysBack))
-	step = datetime.timedelta(seconds=random.randint(minSecondsStep,maxSecondsStep))
-	t = datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) )
-	fakeDate = datetime.datetime.combine( startDate, t )
 
-	if ( len(sys.argv) == 1 ):
-	# Generate sample of noise generator output
-		i = 0;
-		while (i<20):
-			print( str( fakeDate ))
-			step = datetime.timedelta(seconds=random.randint(minSecondsStep,maxSecondsStep))
-			fakeDate += step
-			i = i+1
-		
-
-	else:
-	# Prepend noise generator output to file
-		with open( sys.argv[1] ) as file:
-    			cloakedFile = file.readlines()
-
-		with open( sys.argv[1], "w" ) as file:
-			for i in cloakedFile:
-				file.write( str( fakeDate ) + " " + i )
-				step = datetime.timedelta(seconds=random.randint(minSecondsStep,maxSecondsStep))
+def prependTimestamps(cloakedFilename:str):
+	fakeDate = datetime.datetime.combine(START_DATE, T)
+	if cloakedFilename:
+		# Prepend noise generator output to file
+		with open(cloakedFilename, encoding="utf-8") as file:
+			cloakedFile = file.readlines()
+	
+		with open(cloakedFilename, "w", encoding="utf-8") as file:
+			for line in cloakedFile:
+				file.write(f"{fakeDate} {line}"),
+				step = datetime.timedelta(seconds=random.randint(MIN_SECONDS_STEP, MAX_SECONDS_STEP))
 				fakeDate += step
-				if fakeDate.date() > today:
-					startDate = today - datetime.timedelta(days=random.randint(minDaysBack,maxDaysBack))
-					fakeDate = datetime.datetime.combine( startDate, datetime.time( random.randint(0,23),random.randint(0,59),random.randint(0,59) ) )
+	else:
+		# Generate sample of noise generator output
+		for _ in range(20):
+			print(f"{fakeDate}")
+			step = datetime.timedelta(seconds=random.randint(MIN_SECONDS_STEP, MAX_SECONDS_STEP))
+			fakeDate += step
+
+
+if __name__ == "__main__":
+	if len(sys.argv) == 2:
+		prependTimestamps(sys.argv[1])
+	else:
+		print("usage: prependTimestamps.py <exfilFilename>")
+		print()
+		print("Strip leading timestamps prior to decloaking the cloaked file.")
+		print()
+
 
