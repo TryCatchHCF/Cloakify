@@ -26,12 +26,13 @@
 #
 #   $ ./decloakify.py cloakedPayload.txt ciphers/desserts.ciph 
 
-
-import sys, getopt, base64
+import base64
+import random
+import sys
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
 
-def Decloakify(cloakedPath:str, cipherPath:str, outputPath:str=""):
+def Decloakify(cloakedPath:str, cipherPath:str, outputPath:str="", password:str=""):
 	"""Cipher file will be read into a list that will be used for the payload's deobfuscation.
 	Cloaked file's contents will be read in line by line mapping the line to a base64 character.
 	If an output path is defined the base64 contents will be decoded and written to the output
@@ -44,11 +45,24 @@ def Decloakify(cloakedPath:str, cipherPath:str, outputPath:str=""):
 	"""
 	with open(cipherPath, encoding="utf-8") as file:
 		arrayCipher = file.readlines()
-
+	
 	clear64 = ""
 	with open(cloakedPath, encoding="utf-8") as file:
-		for line in file:
-			clear64 +=  array64[arrayCipher.index(line)]
+		if password:
+			random.seed(password)
+			lines = file.readlines()
+			# Get a list of each line number in the cloaked file
+			decodeOrdering = [i for i in range(len(lines))]
+			# Shuffle the order of the lines to what they were during encoding
+			random.shuffle(decodeOrdering)
+			# Map the index of the original payload to the index in the cloaked file
+			decodeOrdering = {k: v for v, k in enumerate(decodeOrdering)}
+			# Iterate through the proper line order and reconstruct the unshuffled base64 payload
+			for i in range(len(lines)):
+				clear64 += array64[arrayCipher.index(lines[decodeOrdering[i]])]
+		else:
+			for line in file:
+				clear64 +=  array64[arrayCipher.index(line)]
 
 	payload = base64.b64decode(clear64)
 	if outputPath:

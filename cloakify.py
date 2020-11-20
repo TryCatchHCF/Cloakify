@@ -40,11 +40,14 @@
 #   $ ./cloakify.py payload.txt ciphers/desserts > exfiltrate.txt
 # 
 
-import os, sys, getopt, base64
+import base64
+import os
+import random
+import sys
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
 
-def Cloakify(payloadPath:str, cipherPath:str, outputPath:str=""):
+def Cloakify(payloadPath:str, cipherPath:str, outputPath:str="", password:str=None):
 	"""Payload file's binary contents will be read and converted into base64.
 	Cipher file will be read into a list that will be used for the payload's obfuscation.
 	If an output path is defined the obfuscated content will be written to that otherwise,
@@ -64,6 +67,14 @@ def Cloakify(payloadPath:str, cipherPath:str, outputPath:str=""):
 	except Exception as e:
 		print("Error reading payload file {}: {}".format(payloadPath, e))
 
+	payloadOrdering = None
+	if password:
+		random.seed(password)
+		# Get a list of each line number in the cloaked file
+		payloadOrdering = [i for i in range(len(payloadB64))]
+		# Shuffle the order of the lines
+		random.shuffle(payloadOrdering)
+
 	try:
 		with open(cipherPath, encoding="utf-8") as file:
 			cipherArray = file.readlines()
@@ -73,8 +84,13 @@ def Cloakify(payloadPath:str, cipherPath:str, outputPath:str=""):
 	if outputPath:
 		try:
 			with open(outputPath, "w+", encoding="utf-8") as outFile:
-				for char in payloadB64:
-					outFile.write(cipherArray[array64.index(char)])
+				if payloadOrdering:
+					# Iterate through the randomized line order and write each line to the file
+					for randomLoc in payloadOrdering:
+						outFile.write(cipherArray[array64.index(payloadB64[randomLoc])])
+				else:
+					for char in payloadB64:
+						outFile.write(cipherArray[array64.index(char)])
 		except Exception as e:
 			print("Error writing to output file {}: {}".format(outputPath, e))
 

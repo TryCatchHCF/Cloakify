@@ -39,11 +39,14 @@
 #   $ ./cloakifyFactory.py 
 # 
 
+# Standard Python Libraries
 import base64
+from getpass import getpass
 import os
 import random
 import sys
 
+# Local Python Imports
 import cloakify
 import decloakify
 from removeNoise import removeNoise
@@ -92,12 +95,17 @@ def CloakifyFile():
 		noisePath = SelectFile(gNoiseScripts, NOISE_GENERATOR)
 	else:
 		noisePath = None
+	
+	choice = input("Protect cloaked file with a password: (y/n): ")
+	password = None
+	if choice == "y":
+		password = getPassword(True)
 
 	print("")
 	print(f"Creating cloaked file using cipher: {cipherPath}")
 
 	try:
-		cloakify.Cloakify(sourceFile, os.path.join(".", "ciphers", cipherPath), cloakedFile)
+		cloakify.Cloakify(sourceFile, os.path.join(".", "ciphers", cipherPath), cloakedFile, password)
 	except:
 		print("")
 		print("!!! Well that didn't go well. Verify that your cipher is in the 'ciphers/' subdirectory.")
@@ -108,8 +116,6 @@ def CloakifyFile():
 		try:
 			noiseFuncs[noisePath](cloakedFile)
 		except:
-			import traceback
-			traceback.print_exc()
 			print("")
 			print("!!! Well that didn't go well. Verify that '", cloakedFile, "'")
 			print("!!! is in the current working directory or try again giving full filepath.") 
@@ -183,17 +189,21 @@ def DecloakifyFile():
 
 	cipherPath = SelectFile(gCipherFiles, CIPHER)
 
+	choice = input("Was a password used for this file? (y/n default=n): ")
+
+	password = None
+	if choice == "y":
+		password = getPassword()
+
 	print(f"Decloaking file using cipher: {cipherPath}")
 
 	# Call Decloakify()
 	try:
-		decloakify.Decloakify(sourceFile, os.path.join(".", "ciphers", cipherPath), decloakedFile)
+		decloakify.Decloakify(sourceFile, os.path.join(".", "ciphers", cipherPath), decloakedFile, password)
 
 		print("")
 		print(f"Decloaked file {sourceFile}, saved to {decloakedFile}")
 	except:
-		import traceback
-		traceback.print_exc()
 		print("")
 		print("!!! Oh noes! Error decloaking file (did you select the same cipher it was cloaked with?)")
 		print("")
@@ -250,11 +260,23 @@ def BrowseFiles(files:list, option:str):
 				cipher = file.read()
 				print(cipher)
 	except:
-		import traceback
-		traceback.print_exc()
 		print(f"!!! Error opening {option} file.\n")
 
 	choice = input( "Press return to continue... " )
+
+
+def getPassword(confirm=False):
+	password = getpass(prompt="Enter password: ")
+
+	if confirm:
+		confirm_password = getpass(prompt="Confirm password: ")
+
+		while password != confirm_password:
+			print("Passwords do not match...please retry")
+			password = getpass(prompt="Enter password: ")
+			confirm_password = getpass(prompt="Confirm password: ")
+		
+	return password
 
 
 def Help():
