@@ -27,37 +27,28 @@ import os, sys, getopt, codecs, random
 
 arrayCode = list ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
-if ( len(sys.argv) > 2 ):
-	print "usage: prepend4digitID.py <exfilFilename>"
-	print
-	print "Strip tag prior to decloaking the cloaked file."
-	print
-	exit
 
-else:
-
-	if ( len(sys.argv) == 1):
-
-		i = 0
-		while ( i<20 ):
-
-			print( "Tag: " + 
-				random.choice(arrayCode) + 
-				random.choice(arrayCode) + 
-				random.choice(arrayCode) + 
-				random.choice(arrayCode))
-			i = i+1
-
+def prependID(cloakedFilename:str):
+	if cloakedFilename:
+		# Prepend noise generator output to file
+		with open(cloakedFilename, encoding="utf-8") as file:
+			cloakedFile = file.readlines()
+	
+		with open(cloakedFilename, "w", encoding="utf-8") as file:
+			for line in cloakedFile:
+				file.write(f"Tag: {random.choice(arrayCode)}{random.choice(arrayCode)}{random.choice(arrayCode)}{random.choice(arrayCode)} {line}"),
 	else:
-		with open( sys.argv[1] ) as file:
-    			exfilFile = file.read().splitlines()
+		# Generate sample of noise generator output
+		for _ in range(20):
+			print(f"Tag: {random.choice(arrayCode)}{random.choice(arrayCode)}{random.choice(arrayCode)}{random.choice(arrayCode)}")
 
-		with open( sys.argv[1], "w" ) as file:
-			for i in exfilFile:
-				if i != '\n':
-					file.write( "Tag: " + 
-						random.choice(arrayCode) + 
-						random.choice(arrayCode) + 
-						random.choice(arrayCode) + 
-						random.choice(arrayCode) + 
-						" " + i + "\n" )
+
+if __name__ == "__main__":
+	if len(sys.argv) == 2:
+		prependID(sys.argv[1])
+	else:
+		print("usage: prependID.py <exfilFilename>")
+		print()
+		print("Strip leading ID prior to decloaking the cloaked file.")
+		print()
+

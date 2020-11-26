@@ -26,36 +26,57 @@
 #
 #   $ ./decloakify.py cloakedPayload.txt ciphers/desserts.ciph 
 
-
-import sys, getopt, base64
+import base64
+import random
+import sys
 
 array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+=")
 
-def Decloakify( arg1, arg2, arg3 ):
+def Decloakify(cloakedPath:str, cipherPath:str, outputPath:str="", password:str=""):
+	"""Cipher file will be read into a list that will be used for the payload's deobfuscation.
+	Cloaked file's contents will be read in line by line mapping the line to a base64 character.
+	If an output path is defined the base64 contents will be decoded and written to the output
+	file otherwise it will be written to the console.
 
-	with open( arg1 ) as file:
-    		listExfiltrated = file.readlines()
-
-	with open( arg2) as file:
-    		arrayCipher = file.readlines()
-
+	Args:
+		cloakedPath (str): Path to the file that is encoded
+		cipherPath (str): Path to the file used as the base64 cipher
+		outputPath (str): Path to write out the decoded
+	"""
+	with open(cipherPath, encoding="utf-8") as file:
+		arrayCipher = file.readlines()
+	
 	clear64 = ""
+	with open(cloakedPath, encoding="utf-8") as file:
+		if password:
+			random.seed(password)
+			lines = file.readlines()
+			# Get a list of each line number in the cloaked file
+			decodeOrdering = [i for i in range(len(lines))]
+			# Shuffle the order of the lines to what they were during encoding
+			random.shuffle(decodeOrdering)
+			# Map the index of the original payload to the index in the cloaked file
+			decodeOrdering = {k: v for v, k in enumerate(decodeOrdering)}
+			# Iterate through the proper line order and reconstruct the unshuffled base64 payload
+			for i in range(len(lines)):
+				clear64 += array64[arrayCipher.index(lines[decodeOrdering[i]])]
+		else:
+			for line in file:
+				clear64 +=  array64[arrayCipher.index(line)]
 
-	for word in listExfiltrated:
-		clear64 +=  array64[ arrayCipher.index(word) ]
-
-	if ( arg3 != "" ):
-		with open( arg3, "w" ) as outFile:
-			outFile.write( base64.b64decode( clear64 ))
-
+	payload = base64.b64decode(clear64)
+	if outputPath:
+		with open(outputPath, "wb") as outFile:
+			outFile.write(payload)
 	else:
-		print base64.b64decode( clear64 ),
+		print(payload)
 
 
 if __name__ == "__main__":
-        if (len(sys.argv) != 3):
-                print "usage: decloakify.py <cloakedFilename> <cipherFilename>"
-                exit
+	if len(sys.argv) == 3:
+		Decloakify(sys.argv[1], sys.argv[2])
+	elif len(sys.argv) == 4:
+		Decloakify(sys.argv[1], sys.argv[2], sys.argv[3])
 	else:
-        	Decloakify( sys.argv[1], sys.argv[2], "" )
-
+		print("usage: decloakify.py <cloakedFilename> <cipherFilename> <outputFileName-optional>")
+		exit(-1)
