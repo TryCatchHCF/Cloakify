@@ -1,0 +1,7 @@
+[run]
+source = .
+omit = [".eggs/*", "venv/*"]
+
+[report]
+exclude_lines = ["pragma: no cover", "if __name__ == .__main__.:"]
+fail_under = 80

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # Filename:  decloakify.py
 #
@@ -33,29 +33,29 @@ array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+
 
 def Decloakify( arg1, arg2, arg3 ):
 
-	with open( arg1 ) as file:
-    		listExfiltrated = file.readlines()
+    with open( arg1 ) as file:
+        listExfiltrated = file.readlines()
 
-	with open( arg2) as file:
-    		arrayCipher = file.readlines()
+    with open( arg2) as file:
+        arrayCipher = file.readlines()
 
-	clear64 = ""
+    clear64 = ""
 
-	for word in listExfiltrated:
-		clear64 +=  array64[ arrayCipher.index(word) ]
+    for word in listExfiltrated:
+        clear64 +=  array64[ arrayCipher.index(word) ]
 
-	if ( arg3 != "" ):
-		with open( arg3, "w" ) as outFile:
-			outFile.write( base64.b64decode( clear64 ))
+    if ( arg3 != "" ):
+        with open( arg3, "w" ) as outFile:
+            outFile.write( base64.b64decode( clear64 ))
 
-	else:
-		print base64.b64decode( clear64 ),
+    else:
+        print(base64.b64decode( clear64 ), end="")
 
 
 if __name__ == "__main__":
-        if (len(sys.argv) != 3):
-                print "usage: decloakify.py <cloakedFilename> <cipherFilename>"
-                exit
-	else:
-        	Decloakify( sys.argv[1], sys.argv[2], "" )
+    if (len(sys.argv) != 3):
+        print("usage: decloakify.py <cloakedFilename> <cipherFilename>")
+        sys.exit(1)
+    else:
+        Decloakify( sys.argv[1], sys.argv[2], "" )
 
