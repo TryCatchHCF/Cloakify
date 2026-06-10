@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # 
 # Filename:  removeNoise.py
 #
@@ -20,19 +20,19 @@
 import os, sys, getopt
 
 if ( len(sys.argv) != 4 ):
-	print "usage: removeNoise.py <numberOfColumnsToStrip> <noisyFilename> <outputFile>"
-	print
-	exit
+    print("usage: removeNoise.py <numberOfColumnsToStrip> <noisyFilename> <outputFile>")
+    print()
+    sys.exit(1)
 
 else:
-	numberOfColumnsToStrip = int( sys.argv[1] )
+    numberOfColumnsToStrip = int( sys.argv[1] )
 
-	with open( sys.argv[2] ) as file:
-    		noisyFile = file.readlines()
-		file.close()
+    with open( sys.argv[2] ) as file:
+        noisyFile = file.readlines()
+        file.close()
 
-	with open( sys.argv[3], "w" ) as file:
-		for line in noisyFile:
-			if line != '\n':
-				file.write( ' '.join(line.split(' ')[numberOfColumnsToStrip:]))
-		file.close()
+    with open( sys.argv[3], "w" ) as file:
+        for line in noisyFile:
+            if line != '\n':
+                file.write( ' '.join(line.split(' ')[numberOfColumnsToStrip:]))
+        file.close()

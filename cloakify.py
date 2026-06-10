@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # 
 # Filename:  cloakify.py 
 #
@@ -46,40 +46,40 @@ array64 = list("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/+
 
 def Cloakify( arg1, arg2, arg3 ):
 
-	payloadFile = open( arg1, 'rb' )
-	payloadRaw = payloadFile.read()
-	payloadB64 = base64.encodestring( payloadRaw )
+    payloadFile = open( arg1, 'rb' )
+    payloadRaw = payloadFile.read()
+    payloadB64 = base64.encodebytes( payloadRaw ).decode()
 
-	try:
-		with open( arg2 ) as file:
-    			cipherArray = file.readlines()
-	except:
-		print ""
-		print "!!! Oh noes! Problem reading cipher '", arg2, "'"
-		print "!!! Verify the location of the cipher file" 
-		print ""
+    try:
+        with open( arg2 ) as file:
+            cipherArray = file.readlines()
+    except:
+        print("")
+        print("!!! Oh noes! Problem reading cipher '", arg2, "'")
+        print("!!! Verify the location of the cipher file")
+        print("")
 
-	if ( arg3 != "" ):
-		try:
-			with open( arg3, "w+" ) as outFile:
-				for char in payloadB64:
-					if char != '\n':
-						outFile.write( cipherArray[ array64.index(char) ] )
-		except:
-			print ""
-			print "!!! Oh noes! Problem opening or writing to file '", arg3, "'"
-			print ""
-	else:
-		for char in payloadB64:
-			if char != '\n':
-				print cipherArray[ array64.index(char) ],
+    if ( arg3 != "" ):
+        try:
+            with open( arg3, "w+" ) as outFile:
+                for char in payloadB64:
+                    if char != '\n':
+                        outFile.write( cipherArray[ array64.index(char) ] )
+        except:
+            print("")
+            print("!!! Oh noes! Problem opening or writing to file '", arg3, "'")
+            print("")
+    else:
+        for char in payloadB64:
+            if char != '\n':
+                print(cipherArray[ array64.index(char) ], end="")
 
 
 if __name__ == "__main__":
-	if ( len(sys.argv) != 3 ):
-		print "usage: cloakify.py <payloadFilename> <cipherFilename>"
-		exit
+    if ( len(sys.argv) != 3 ):
+        print("usage: cloakify.py <payloadFilename> <cipherFilename>")
+        sys.exit(1)
 
-	else:
-		Cloakify( sys.argv[1], sys.argv[2], "" )
+    else:
+        Cloakify( sys.argv[1], sys.argv[2], "" )
 
